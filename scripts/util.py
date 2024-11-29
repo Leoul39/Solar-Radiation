@@ -70,43 +70,43 @@ class EDA:
             A line plot
         """
         try:
-                start=time.time()
-                log.info(f"Loading the line plot for {column} column with the monthly rolling means included...")
-                # Ensure Timestamp is datetime and set it as the index
-                data['Timestamp'] = pd.to_datetime(data['Timestamp'])
-                dataa=data.set_index('Timestamp')
+            start=time.time()
+            log.info(f"Loading the line plot for {column} column with the monthly rolling means included...")
+            # Ensure Timestamp is datetime and set it as the index
+            data['Timestamp'] = pd.to_datetime(data['Timestamp'])
+            dataa=data.set_index('Timestamp')
 
-                # Resample to daily sums (already done as benin_day in your code) for monthly rolling
-                day = dataa.resample('D').sum()
+            # Resample to daily sums (already done as benin_day in your code) for monthly rolling
+            day = dataa.resample('D').sum()
 
-                # Calculate rolling mean (monthly)
-                day['rolling'] = day[column].rolling(window=30).mean()
+            # Calculate rolling mean (monthly)
+            day['rolling'] = day[column].rolling(window=30).mean()
 
-                # Identify end-of-month points
-                end_of_month = day[day.index.is_month_end]
+            # Identify end-of-month points
+            end_of_month = day[day.index.is_month_end]
 
-                # Plot the data
-                plt.figure(figsize=(12, 6))
+            # Plot the data
+            plt.figure(figsize=(12, 6))
 
-                # Plot GHI
-                plt.plot(day.index, day[column], label=column, color='blue', alpha=0.6)
+            # Plot GHI
+            plt.plot(day.index, day[column], label=column, color='blue', alpha=0.6)
 
-                # Plot smoothed GHI
-                plt.plot(day.index, day['rolling'], label=f'Rolling means for {column} per month', color='red', linewidth=2)
+            # Plot smoothed GHI
+            plt.plot(day.index, day['rolling'], label=f'Rolling means for {column} per month', color='red', linewidth=2)
 
-                # Mark end-of-month points on the smoothed line
-                plt.scatter(end_of_month.index, end_of_month['rolling'], color='black', label='End of Month', zorder=5)
+            # Mark end-of-month points on the smoothed line
+            plt.scatter(end_of_month.index, end_of_month['rolling'], color='black', label='End of Month', zorder=5)
 
-                # Customize the plot
-                plt.title(f'{column} and Monthly rolling means with End-of-Month Markers for {name} dataset', fontsize=14)
-                plt.xlabel('Date', fontsize=12)
-                plt.ylabel(column, fontsize=12)
-                plt.legend()
-                plt.xticks(rotation=45)
-                plt.tight_layout()
-                plt.show()
-                end=time.time()
-                log.info(f"Loaded the line plot in {round(end-start,2)} seconds.")
+            # Customize the plot
+            plt.title(f'{column} and Monthly rolling means with End-of-Month Markers for {name} dataset', fontsize=14)
+            plt.xlabel('Date', fontsize=12)
+            plt.ylabel(column, fontsize=12)
+            plt.legend()
+            plt.xticks(rotation=45)
+            plt.tight_layout()
+            plt.show()
+            end=time.time()
+            log.info(f"Loaded the line plot in {round(end-start,2)} seconds.")
         except Exception as e:
              log.error(f"Error occured while loading plot as {e}")
              return None
@@ -211,7 +211,7 @@ class EDA:
             axes[2].set_title('Togo')
             fig.suptitle("Correlational Heatmap for some specific columns of each dataset")
             end=time.time()
-            log.info(f"Loaded the correlational heatmap for all datasets in {round(end-start),2} seconds.")
+            log.info(f"Loaded the correlational heatmap for all datasets in {round(end-start,2)} seconds.")
         except Exception as e:
              log.error(f"Error occured as {e}")
              return None
