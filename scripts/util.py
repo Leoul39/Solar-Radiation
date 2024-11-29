@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import time
+os.chdir('scripts')
 from logger import log
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -20,9 +21,9 @@ def load_data():
         try:
             start=time.time()
             log.info("Loading the datasets ...")
-            data1 = pd.read_csv('../data/benin-malanville.csv')
-            data2 = pd.read_csv('../data/sierraleone-bumbuna.csv')
-            data3 = pd.read_csv('../data/togo-dapaong_qc.csv')
+            data1 = pd.read_csv('data/benin-malanville.csv')
+            data2 = pd.read_csv('data/sierraleone-bumbuna.csv')
+            data3 = pd.read_csv('data/togo-dapaong_qc.csv')
             end=time.time()
             log.info(f"Loaded all three datasets after {round(end-start,2)} seconds")
             return data1,data2,data3
