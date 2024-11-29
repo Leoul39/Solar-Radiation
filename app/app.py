@@ -49,7 +49,7 @@ elif add_sidebar == 'Daily plot':
       st.title("Daily Distribution of :blue[Irradiance] and :green[Temperature]")
       st.markdown("The following visualizes the hourly distribution of irradiance and temperature")
       data_name = st.selectbox("Select a dataframe:", ["Benin", "Sierra Leone", "Togo"])
-      date_name = st.date_input("Pick a date:")
+      date_name = st.date_input("Pick a date (from 2021-10-30 to 2022-10-30):")
       plot_width = st.slider("Set plot width", 6, 20, 10)
       plot_height = st.slider("Set plot height", 4, 15, 6)  
       if st.button("Plot"):
