@@ -4,6 +4,7 @@ import time
 from scripts.logger import log
 import matplotlib.pyplot as plt
 import seaborn as sns
+sns.set_theme('notebook')
 import sidetable
 def load_data():
         """
