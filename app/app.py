@@ -1,5 +1,6 @@
 #Loading important libraries
 import streamlit as st
+import pandas as pd
 import os
 import sys 
 import matplotlib.pyplot as plt
@@ -8,14 +9,16 @@ warnings.filterwarnings('ignore')
 # Loading the necessary scripts from plots and util
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 sys.path.append(project_root)
-from scripts.util import load_data,EDA
+from scripts.util import EDA
 from plots import plots
 
 # Columns for the histogram plot
 lis=['GHI','DHI','DNI','WS','TModA','TModB']
 
 #Loading the datasets 
-benin,sierraleone,togo=load_data()
+benin=pd.read_csv('data/benin-malanville.csv')
+sierraleone=pd.read_csv('data/sierraleone-bumbuna.csv')
+togo=pd.read_csv('data/togo-dapaong_qc.csv')
 # Initializing the class
 eda=EDA(benin,sierraleone,togo)
 # Preprocess to remove negative entries
