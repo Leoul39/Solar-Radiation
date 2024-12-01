@@ -1,7 +1,6 @@
 #Loading important libraries
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # Loading the necessary scripts from plots and util
 from plots import plots
@@ -10,9 +9,9 @@ from plots import plots
 lis=['GHI','DHI','DNI','WS','TModA','TModB']
 
 #Loading the datasets manually
-benin=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/benin-malanville.csv')
-sierraleone=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/sierraleone-bumbuna.csv')
-togo=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/togo-dapaong_qc.csv')
+benin=pd.read_csv('data/benin-malanville.csv')
+sierraleone=pd.read_csv('data/sierraleone-bumbuna.csv')
+togo=pd.read_csv('data/togo-dapaong_qc.csv')
 # Initializing the class
 plots=plots(benin,sierraleone,togo)
 
