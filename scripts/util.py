@@ -1,8 +1,7 @@
 import pandas as pd
 import os
 import time
-os.chdir('scripts')
-from logger import log
+from .logger import log
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set_theme('notebook')
