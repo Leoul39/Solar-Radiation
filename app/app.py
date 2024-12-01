@@ -1,28 +1,25 @@
 #Loading important libraries
 import streamlit as st
 import pandas as pd
-import os
-import sys 
 import matplotlib.pyplot as plt
+
 # Loading the necessary scripts from plots and util
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
-sys.path.append(project_root)
-from scripts.util import EDA
 from plots import plots
+
 # Columns for the histogram plot
 lis=['GHI','DHI','DNI','WS','TModA','TModB']
 
-#Loading the datasets 
+#Loading the datasets manually
 benin=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/benin-malanville.csv')
 sierraleone=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/sierraleone-bumbuna.csv')
 togo=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/togo-dapaong_qc.csv')
 # Initializing the class
-eda=EDA(benin,sierraleone,togo)
-# Preprocess to remove negative entries
-benin,sierraleone,togo=eda.preprocess()
-# Loading the plots module
 plots=plots(benin,sierraleone,togo)
 
+# Preprocess to remove negative entries
+benin,sierraleone,togo=plots.preprocess()
+
+# Setting the page and the streamlit app
 st.set_page_config(page_title="Solar Radiation Analysis", page_icon="🌞", layout="wide", initial_sidebar_state="expanded")
 add_sidebar = st.sidebar.selectbox('Solar Radiation Datasets Analysis',('📊 Summary Statistics',
        '📅 Monthly plot','📆 Daily plot','🗺️ Correlational heatmap','📈 Histograms','🚨 Outlier Detection'))
@@ -99,8 +96,8 @@ elif add_sidebar == '🗺️ Correlational heatmap':
         plot_width = st.slider("Set plot width", 6, 30, 20)
         plot_height = st.slider("Set plot height", 4, 15, 6)  
         if st.button('Generate'):
-                fig=eda.correlation()
-                st.pyplot(fig)  
+                fig=plots.correlation(width=plot_width,height=plot_height)
+                st.pyplot(fig)
 elif add_sidebar  == '📈 Histograms':
         st.title("📈 :blue[Histograms]")
         st.markdown('''
@@ -128,7 +125,7 @@ elif add_sidebar  == '📈 Histograms':
 
                 if selected_data is not None:
                         try:
-                                fig=eda.histogram(data=selected_data,lis=lis,name=data_name)
+                                fig=plots.histogram(data=selected_data,lis=lis,name=data_name)
                                 st.pyplot(fig)  
                         except Exception as e:
                                 st.error(f"An error occurred: {e}")
@@ -149,6 +146,6 @@ elif add_sidebar == '🚨 Outlier Detection':
 
         if selected_data is not None:
              try:
-                st.write(eda.detect_outliers(data=selected_data,column=column_name,method=method,name=data_name))
+                st.write(plots.detect_outliers(data=selected_data,column=column_name,method=method,name=data_name))
              except Exception as e:
                 st.error(f"An error occurred: {e}")
