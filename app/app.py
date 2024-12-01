@@ -4,21 +4,18 @@ import pandas as pd
 import os
 import sys 
 import matplotlib.pyplot as plt
-import warnings
-warnings.filterwarnings('ignore')
 # Loading the necessary scripts from plots and util
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 sys.path.append(project_root)
 from scripts.util import EDA
 from plots import plots
-
 # Columns for the histogram plot
 lis=['GHI','DHI','DNI','WS','TModA','TModB']
 
 #Loading the datasets 
-benin=pd.read_csv('data/benin-malanville.csv')
-sierraleone=pd.read_csv('data/sierraleone-bumbuna.csv')
-togo=pd.read_csv('data/togo-dapaong_qc.csv')
+benin=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/benin-malanville.csv')
+sierraleone=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/sierraleone-bumbuna.csv')
+togo=pd.read_csv('C:/Users/hp/Desktop/Trial/Solar-Radiation/data/togo-dapaong_qc.csv')
 # Initializing the class
 eda=EDA(benin,sierraleone,togo)
 # Preprocess to remove negative entries
@@ -29,18 +26,7 @@ plots=plots(benin,sierraleone,togo)
 st.set_page_config(page_title="Solar Radiation Analysis", page_icon="🌞", layout="wide", initial_sidebar_state="expanded")
 add_sidebar = st.sidebar.selectbox('Solar Radiation Datasets Analysis',('📊 Summary Statistics',
        '📅 Monthly plot','📆 Daily plot','🗺️ Correlational heatmap','📈 Histograms','🚨 Outlier Detection'))
-#
 
-# Sidebar customizations
-#with st.sidebar:
-#st.markdown("<h2 style='color: #0A74DA;'>Solar Radiation Datasets</h2>", unsafe_allow_html=True)
-#add_sidebar = st.sidebar.selectbox("Choose Analysis Type", (
-#            " Summary Statistics",
-#            " Monthly Plot",
-#            " Daily Plot",
-#            " Correlation Heatmap",
-#            " Histograms",
- #           " Outlier Detection"))
 if add_sidebar == '📊 Summary Statistics':
     st.title('📊 Summary Statistics')
     st.header("Stats for :blue[Benin] dataframe",divider='blue')
