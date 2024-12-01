@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 # Loading the necessary scripts from plots and util
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
 sys.path.append(project_root)
 from scripts.util import load_data,EDA
 from plots import plots
@@ -66,7 +66,6 @@ elif add_sidebar == '📅 Monthly plot':
 
         if selected_data is not None:
              try:   
-                #plt.figure(figsize=(plot_width, plot_height))
                 fig=plots.plot_by_month(data=selected_data, column=column_name, name=data_name,width=plot_width,height=plot_height)
                 if fig:
                         st.plotly_chart(fig,use_container_width=True)  
@@ -91,8 +90,6 @@ elif add_sidebar == '📆 Daily plot':
 
         if selected_data is not None:
              try:
-                
-                #plt.figure(figsize=(plot_width, plot_height))
                 fig= plots.plot_by_day(data=selected_data,date=date_name,name=data_name,width=plot_width,height=plot_height)
                 if fig:
                         st.plotly_chart(fig,use_container_width=True)  
@@ -116,7 +113,6 @@ elif add_sidebar == '🗺️ Correlational heatmap':
                 fig=eda.correlation()
                 st.pyplot(fig)  
 elif add_sidebar  == '📈 Histograms':
-        #['GHI','DHI','DNI','WS','TModA','TModB']
         st.title("📈 :blue[Histograms]")
         st.markdown('''
                 The following is a correlational heatmap for:
