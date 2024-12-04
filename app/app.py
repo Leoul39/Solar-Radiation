@@ -35,7 +35,7 @@ elif add_sidebar == '📅 Monthly plot':
     st.title("📅 :blue[Monthly Plot]")
     st.markdown("The following plot will depict the distribution the column entered for the dataframe mentioned with the rolling means added to it")
     data_name = st.selectbox("Select a dataframe:", ["Benin", "Sierra Leone", "Togo"])
-    column_name = st.text_input("Enter the column name from the dataset")
+    column_name = st.selectbox("Enter the column name from the dataset",['GHI','DNI','DHI','WS','WSgust','RH','Tamb'])
     plot_width = st.slider("Set plot width", 6, 30, 20)  
     plot_height = st.slider("Set plot height", 4, 15, 6)  
     
@@ -131,7 +131,7 @@ elif add_sidebar  == '📈 Histograms':
 elif add_sidebar == '🚨 Outlier Detection':
       st.title("🚨 :blue[Outlier Detection]")
       data_name=st.selectbox("Select a dataframe:", ["Benin", "Sierra Leone", "Togo"])
-      column_name = st.text_input("Enter the column from the dataframe")
+      column_name = st.selectbox("Enter the column name from the dataset",['GHI','DNI','DHI','WS','WSgust','RH','Tamb'])
       method=st.selectbox('Select a detection method',["iqr","z-score"])
       if st.button("Submit"):
         if data_name == "Benin":
